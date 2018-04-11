@@ -40,36 +40,28 @@ public class PrimeComputing
        System.out.println("\nProcessing......");
        
        do {
-           //1. Remove the first element in the original queue of integers
-           //and set the next prime "nextPrime" to be the number
-           
-           
-           //TO BE COMPLETED
-           
+           nextPrime = originalQueue.pop();
            System.out.println("The next prime to divide: " + nextPrime);
-           
 
-           //2. Enqueue the next Prime into the primeQueue.
-           //TO BE COMPLETED
-           
-           //3. Go through the integers in the original queue,
-           //and elimienate any number that is divisible by the next prime
-           //HINT: you will need to remove each integer from the original queue
-           //to examine them, and put back the integers that are NOT
-           //divisible by the next prime.
-           //This is where you will need a back up queue.
-           //Also, you will need to keep track of the last such prime
-           //that is used to divide other integers in the original queue.
-           
-           //TO BE COMPLETED
+           primeQueue.add(nextPrime);
+
+           int selectedElement = 0;
+           int lastElement = originalQueue.getLast();
+
+           do {
+               selectedElement = originalQueue.pop();
+               if (selectedElement % nextPrime != 0)
+                   originalQueue.add(selectedElement);
+           } while (selectedElement != lastElement);
+
+           lastPrime = nextPrime;
            
        } while (nextPrime <= Math.sqrt(n));
     
-       
-       //4. Transfer all remaining integers in the original queue
-       //to the prime queue.
- 
-       //TO BE COMPLETED
+       while (originalQueue.peek() != null) {
+           primeQueue.add(originalQueue.pop());
+       }
+
        
    }
 
